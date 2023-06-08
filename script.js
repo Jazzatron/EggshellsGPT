@@ -47,7 +47,4 @@ document.querySelector("#send-button").addEventListener("click", sendMessage);
 chatInput.addEventListener("keydown", (e) => {
   if (e.key == "Enter") sendMessage();
 });
-/* var chatbotMessage = document.createElement('p');
-    chatbotMessage.textContent = 'Hey, you';
-    chatbotMessage.style.color = '#EB9600';
-    chatHistory.appendChild(chatbotMessage); */
+
