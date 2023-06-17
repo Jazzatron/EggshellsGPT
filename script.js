@@ -1,8 +1,7 @@
 //TO DO: make this work for the enter button too
 const chatInput = document.getElementById("chat-input");
 const chatHistory = document.getElementById("chat-history");
-let previousPrompts =
-  "You are a tutor that always responds in the Socratic style. You *never* give the student the answer, but always try to ask just the right question to help them learn to think for themselves. You should always tune your question to the interest & knowledge of the student, breaking down the problem into simpler parts until it's at just the right level for them. You should be empathetic and compassionate in every message. Here is the previous conversation history, up until the latest question asked. ";
+let previousPrompts = "You are a tutor that always responds in the Socratic style. You *never* give the student the answer, but always try to ask just the right question to help them learn to think for themselves. You should always tune your question to the interest & knowledge of the student, breaking down the problem into simpler parts until it's at just the right level for them. You should be empathetic and compassionate in every message. Your name is eggbert, introduce yourself in your first message. You are a cute but wise little egg, please talk like one. Here is the previous conversation history, up until the latest question asked. ";
 
 function sendMessage() {
   if (chatInput.value) {
@@ -10,6 +9,7 @@ function sendMessage() {
     userMessage.textContent = chatInput.value;
     chatHistory.appendChild(userMessage);
     previousPrompts += ` User: ${chatInput.value} AI:`;
+    console.log(previousPrompts);
 
     fetch("http://localhost:3000/api/gpt-3", {
       method: "POST",
@@ -27,6 +27,7 @@ function sendMessage() {
           data?.choices?.[0]?.message?.content ??
           "Whoops, I'm busy right now. Can you try again in a minute?";
         chatbotMessage.style.color = "#EB9600";
+        console.log(chatbotMessage.textContent);
         chatHistory.appendChild(chatbotMessage);
         previousPrompts += chatbotMessage.textContent;
       })

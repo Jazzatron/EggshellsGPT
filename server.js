@@ -25,8 +25,8 @@ app.post("/api/gpt-3", async (req, res) => {
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: userMessage }],
-      max_tokens: 16, 
-      temperature: 0.5
+      //max_tokens: 26, 
+      //temperature: 0.5
     });
     console.log("Response from OpenAI API:", response);
     res.json(response.data);
