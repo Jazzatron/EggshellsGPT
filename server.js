@@ -7,7 +7,8 @@ config();
 
 const openai = new OpenAIApi(
   new Configuration({
-    apiKey: process.env.OPENAI_API_KEY
+    apiKey: process.env.OPENAI_API_KEY,
+    //basePath: "https://api.openai.com/v1",
   })
 );
 
@@ -23,15 +24,19 @@ app.post("/api/gpt-3", async (req, res) => {
 
   try {
     const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4",
+      //model: "text-davinci-003",
+      //prompt: userMessage,
+      
       messages: [{ role: "user", content: userMessage }],
-      //max_tokens: 26, 
-      //temperature: 0.5
+      max_tokens: 1024,
+      temperature: 0,
+      //presence_penalty: -2,
     });
     console.log("Response from OpenAI API:", response);
     res.json(response.data);
   } catch (error) {
-    //console.error("Error from OpenAI API:", error);
+    console.error("Error from OpenAI API:", error);
     res.status(500).json({ error: error.toString() });
   }
 });
