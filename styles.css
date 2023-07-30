@@ -1,7 +1,5 @@
 body {
-  /*background-color: #F2E2D5;*/
   background-image: url('EggshellsBackground2.jpeg');
-
   font-family: 'Nunito', sans-serif;
   margin: 0;
   padding: 0;
@@ -26,7 +24,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #F5EDD7; /* Replace with your color */
+  background-color: #F5EDD7; 
   width: 50%;
   height: 100%;
   box-sizing: border-box;
@@ -34,13 +32,9 @@ body {
 }
 
 .chat-image {
-  /*width: 50%;*/
   max-width: 100%;
   height: 100%;
-  
-  /*object-fit: cover;*/
   object-fit: contain;
-
 }
 
 .chat-container {
@@ -113,18 +107,18 @@ body {
 }
 
 
-/* ... Rest of your CSS ... */
+
 
 @media (max-width: 950px) {
   .main-container {
     flex-direction: column;
     width: 90%;
-    height: 80vh; /* Changed from auto to 90vh to ensure a fixed height */
-    justify-content: space-between; /* Ensure there's space between the image and chat-container */
+    height: 80vh; 
+    justify-content: space-between; 
   }
 
   .image-container {
-    height: 30%; /* Assign a fixed percentage height to the image container */
+    height: 30%; 
     width: 100%;
     border-right: none;
     border-bottom: 1px solid #fcc0eb;
@@ -132,24 +126,24 @@ body {
 
   .chat-image {
     max-width: 100%;
-    max-height: 100%; /* Adjust the max-width and max-height */
+    max-height: 100%; 
   }
 
   .chat-container {
     width: 100%;
-    height: 70%; /* Assign the remaining height to chat-container */
+    height: 70%; 
     padding-left: 0;
     padding-top: 20px;
   }
 
   .chat-history {
-    height: calc(100% - 60px); /* Adjust the calculation according to the height of your input container and any other elements or padding inside your chat-container */
+    height: calc(100% - 60px); 
   }
 }
 
 @media (min-width: 601px) and (max-width: 950px) {
   .main-container {
-    width: 600px; /* Keep the width of the container constant */
+    width: 600px; 
   }
 }
 
