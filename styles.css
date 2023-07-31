@@ -148,3 +148,37 @@ body {
 }
 
 
+/* Style for the navigation bar */
+#navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: #F5EDD7;
+  position: fixed; 
+  width: 100%; 
+  top: 0; 
+  z-index: 1000; 
+  border-bottom: 2px solid #000;
+}
+
+/* Style for the buttons in the navigation bar */
+#navbar button {
+  color: #000;
+  background-color: #F5EDD7;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect for the buttons */
+#navbar button:hover {
+  background-color: #ddd;
+  color: #333;
+  
+}
+
+
+.bold {
+  font-weight: bold;
+}
