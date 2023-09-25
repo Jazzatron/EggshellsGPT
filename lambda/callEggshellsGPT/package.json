@@ -1,0 +1,14 @@
+{
+  "name": "calleggshellsgpt",
+  "version": "1.0.0",
+  "description": "AWS Lambda function to call eggshells",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JK",
+  "license": "ISC",
+  "dependencies": {
+    "openai": "^4.10.0"
+  }
+}
