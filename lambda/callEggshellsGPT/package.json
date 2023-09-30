@@ -9,6 +9,8 @@
   "author": "JK",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.421.0",
+    "@aws-sdk/lib-dynamodb": "^3.421.0",
     "openai": "^4.10.0"
   }
 }
