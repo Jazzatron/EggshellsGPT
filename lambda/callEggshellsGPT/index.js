@@ -10,14 +10,10 @@ const openai = new OpenAI(
 exports.handler = async (event, context) => {
   const masterPrompt = process.env.WORRY_TIME_PROMPT
   const masterMessage = {role: "system", content: masterPrompt}
-  console.log(event.body)
-
-  const body = await JSON.parse(event.body)
+  console.log("Event: ", event)
   
-  console.log(body)
-  
-  const cleanedMessages = body.messages.filter((message)=>message.role!=="system")
-  const userMessages = body.messages;
+  const cleanedMessages = event.messages.filter((message)=>message.role!=="system")
+  const userMessages = event.messages;
   console.log('Received message:', userMessages);
 
   let response
