@@ -1,4 +1,8 @@
 const { OpenAI } = require("openai")
+const { DynamoDBClient, PutItemCommand  } = require("@aws-sdk/client-dynamodb");
+
+const dynamo = new DynamoDBClient({});
+
 console.log('Loading functions');
 
 const openai = new OpenAI(
@@ -16,25 +20,33 @@ exports.handler = async (event, context) => {
   
   console.log(body)
   
-  const cleanedMessages = body.messages.filter((message)=>message.role!=="system")
+  const cleanedMessages = body.messages.filter((message)=>message.role==="user"||message.role==="assistant")
   const userMessages = body.messages;
   console.log('Received message:', userMessages);
 
-  let response
+  let result
   try {
-    response = await openai.chat.completions.create({
+    const response = await openai.chat.completions.create({
       model: "gpt-4",
       messages: [masterMessage, ...userMessages],
       max_tokens: 1024,
       temperature: 0,
     });
-    console.log("Response from OpenAI API:", response.choices[0].message);
+    console.log("Response from OpenAI API: ", response.choices[0].message);
+    result = {statusCode: 200, body: JSON.stringify(response.choices[0].message)}
   } catch (error) {
-    console.error("Error from OpenAI API:", error);
-    throw new error
+    console.error("Error from OpenAI API: ", error);
+    result = {statusCode: 500, body: JSON.stringify(error)}
   }
-    
-    
-    const result = {statusCode: 200, body: JSON.stringify(response.choices[0].message)}
-    return result;
+   
+  // try {
+  //   const conversationItem = {id_conversation:"01HBKFCFHCJ99FNEC73885Q6WG", unix_timestamp: 1696092037, master_prompt: "worry_time", user_messages: userMessages }  
+  //   const conversationPutCommand = new PutItemCommand({TableName: "conversations", item: conversationItem})   
+  //   await dynamo.send(conversationPutCommand)
+  // } catch (error) {
+  //   console.error("Error from DynamoDB: ", error)
+  //   result = {statusCode: 500, body: JSON.stringify(error)}
+  // }
+
+  return result;
 };
