@@ -1,3 +1,4 @@
 .env
 /node_modules/*
 /lambda/callEggshellsGPT/node_modules/*
+/lambda/callEggshellsGPT/nodejs/*

@@ -27,10 +27,9 @@ exports.handler = async (event, context) => {
     console.log("Response from OpenAI API:", response.choices[0].message);
   } catch (error) {
     console.error("Error from OpenAI API:", error);
-    throw new error
+    throw error
   }
     
-    
-    const result = {statusCode: 200, body: JSON.stringify(response.choices[0].message)}
-    return result;
+  const result = response.choices[0].message
+  return result;
 };
