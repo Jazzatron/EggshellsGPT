@@ -17,8 +17,7 @@ exports.handler = async (event, context) => {
   const masterPrompt = process.env.WORRY_TIME_PROMPT
   const masterMessage = {role: "system", content: masterPrompt}
   
-  const cleanedMessages = event.messages.filter((message)=>message.role!=="system")
-  const converstaionHistory = event.messages;
+  const conversationHistory = event.messages.filter((message)=>message.role!=="system")
   
   if(!event.id_conversation || !event.unix_timestamp) {
     console.error("No missing id_conversation or unix_timestamp")
@@ -29,7 +28,7 @@ exports.handler = async (event, context) => {
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4",
-      messages: [masterMessage, ...converstaionHistory],
+      messages: [masterMessage, ...conversationHistory],
       max_tokens: 1024,
       temperature: 0,
     });
@@ -41,7 +40,7 @@ exports.handler = async (event, context) => {
   }
   
   try {
-    const conversationItem = {id_conversation:event.id_conversation, unix_timestamp: event.unix_timestamp, master_prompt: "worry_time", user_messages: [...converstaionHistory, eggshellResponse]}  
+    const conversationItem = {id_conversation:event.id_conversation, unix_timestamp: event.unix_timestamp, master_prompt: "worry_time", user_messages: [...conversationHistory, eggshellResponse]}  
     const conversationPutCommand = new PutCommand({TableName: "conversations", Item: conversationItem})   
     await dynamo.send(conversationPutCommand)
   } catch (error) {
