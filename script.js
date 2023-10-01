@@ -12,15 +12,16 @@ async function sendMessage() {
     //Disable chat input when waiting for response
     let chatInput = document.querySelector('#chat-input');
     chatInput.disabled=true;
-    chatInput.placeholder = "Waiting for Eggbert to respond...";
+    const latestMessage = chatInput.value
+    chatInput.value = "Waiting for Eggbert to respond...";
     
     //Put user input into chatbox
     var userMessage = document.createElement("p");
-    userMessage.textContent = chatInput.value;
+    userMessage.textContent = latestMessage;
     chatHistory.appendChild(userMessage);
     chatHistory.scrollTop = chatHistory.scrollHeight;
 
-    pastPrompts.push({role: "user", content: chatInput.value});
+    pastPrompts.push({role: "user", content: latestMessage});
     try {
       const response = await fetch("https://xg1vey3un4.execute-api.eu-north-1.amazonaws.com/default/callEggshellsGPT2", {
         method: "POST",
