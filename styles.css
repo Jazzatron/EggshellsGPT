@@ -151,6 +151,16 @@ body {
   }
 }
 
+@media (max-width: 450px) {
+  .main-container{
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border-radius: 0;
+  }
+}
+
 @media (min-width: 601px) and (max-width: 950px) {
   .main-container {
     width: 600px; 

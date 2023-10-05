@@ -5,8 +5,6 @@ let pastPrompts = [];
 const id_conversation = ULID.ulid()
 const unix_timestamp = Date.now()
 
-document.querySelector("\#worrytimeButton").classList.add('bold'); 
-
 // This prompts Eggbert to respond straight away and welcome the user
 // This way the user starts with a non-blank screen
 let chatInitialisationMessage = "Hello"
