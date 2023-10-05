@@ -77,13 +77,13 @@ body {
   align-self: flex-end;
 }
 
-.chat-history p:nth-child(even) {
+.chat-history p:nth-child(odd) {
   background: #FFEED8;
   color: #000 !important;
   align-self: flex-start;
 }
 
-.chat-history p:nth-child(odd) {
+.chat-history p:nth-child(even) {
   background: #EAF6F5;
   color: #000;
 }

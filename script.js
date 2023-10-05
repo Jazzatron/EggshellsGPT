@@ -7,20 +7,31 @@ const unix_timestamp = Date.now()
 
 document.querySelector("\#worrytimeButton").classList.add('bold'); 
 
-async function sendMessage() {
-  if (chatInput.value) {
+// This prompts Eggbert to respond straight away and welcome the user
+// This way the user starts with a non-blank screen
+let chatInitialisationMessage = "Hello"
+sendMessage(chatInitialisationMessage)
+
+async function sendMessage(event) {
+  //take the first message if it is a string and not the Eventtriggering the function
+  const initialisationMessage = typeof event === "string" && event
+  let latestMessage = initialisationMessage || chatInput.value
+  
+  if (latestMessage) {
     //Disable chat input when waiting for response
     let chatInput = document.querySelector('#chat-input');
     chatInput.disabled=true;
-    const latestMessage = chatInput.value
-    chatInput.value = "Waiting for Eggbert to respond...";
-    
-    //Put user input into chatbox
-    var userMessage = document.createElement("p");
-    userMessage.textContent = latestMessage;
-    chatHistory.appendChild(userMessage);
-    chatHistory.scrollTop = chatHistory.scrollHeight;
-
+    chatInput.value = initialisationMessage ? "Eggbert will be with you shortly..." : "Waiting for Eggbert to respond...";
+  
+    // We don't want the initialisation message ("Hello") to show in the chat
+    if(!initialisationMessage) {
+      //Put user input into chatbox
+      var userMessage = document.createElement("p");
+      userMessage.textContent = latestMessage;
+      chatHistory.appendChild(userMessage);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+  
     pastPrompts.push({role: "user", content: latestMessage});
     try {
       const response = await fetch("https://xg1vey3un4.execute-api.eu-north-1.amazonaws.com/default/callEggshellsGPT2", {
@@ -48,7 +59,6 @@ async function sendMessage() {
 
       pastPrompts.push({role:"assistant", content:chatbotMessage.textContent});
       chatHistory.scrollTop = chatHistory.scrollHeight;
-
     } catch(error) {
         //AI response if error
         var chatbotMessage = document.createElement("p");
